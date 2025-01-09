@@ -40,6 +40,9 @@ namespace WebApplication1.Controllers
         [HttpGet("{id:int}", Name = "ObterCategoria")]
         public ActionResult<Categoria> Get(int id)
         {
+
+            throw new Exception("Exeção ao retornar o produto pelo ID");
+
             var categoria = _context.Categorias.FirstOrDefault(c => c.CategoriaId == id);
             if (categoria == null)
             {

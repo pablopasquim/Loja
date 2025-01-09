@@ -37,11 +37,12 @@ namespace WebApplication1.Controllers
         }
 
         [HttpGet("{id:int}", Name = "ObterProduto")]
-        public ActionResult<Produto> Get(int id)
+        public async Task<ActionResult<Produto>> Get(int id)
         {
             try
             {
-                var produto = _context.Produtos.FirstOrDefault(p => p.ProdutoId == id);
+                var produto = await _context.Produtos.AsNoTracking()
+                    .FirstOrDefaultAsync(p => p.ProdutoId == id);
                 if (produto == null)
                 {
                     return NotFound("Produto não encontrado.");
